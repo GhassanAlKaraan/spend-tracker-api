@@ -1,0 +1,25 @@
+{
+  "name": "spend_tracker_api",
+  "version": "1.0.0",
+  "description": "API for the flutter spend tracker application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GhassanAlKaraan/spend-tracker-api.git"
+  },
+  "keywords": [
+    "ExpressJs",
+    "NodeJs",
+    "MongoDB"
+  ],
+  "author": "Ghassan Al Karaan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GhassanAlKaraan/spend-tracker-api/issues"
+  },
+  "homepage": "https://github.com/GhassanAlKaraan/spend-tracker-api#readme"
+}
