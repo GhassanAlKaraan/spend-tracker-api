@@ -10,17 +10,22 @@ const recordSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+  },
   amount: {
     type: Number,
     required: true,
   },
-  date: {
+  currency: {
+    type: String,
+    enum: ['LBP', 'USD'],
+    required: true,
+  },
+  lastUpdated: {
     type: Date,
     default: Date.now
-  },
-  description: {
-    type: String,
-  },
+  }
 });
 
 module.exports = mongoose.model('Record', recordSchema);

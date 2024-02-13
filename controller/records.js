@@ -26,7 +26,7 @@ exports.getRecords = asyncHandler(async (req, res, next) => {
 exports.getRecord = asyncHandler(async (req, res, next) => {
   const record = await Record.findById(req.params.id);
 
-  if (!bootcamp) {
+  if (!record) {
     return res.status(404).json({
       success: false,
       data: `No record found with id ${req.params.id}`,
@@ -59,10 +59,7 @@ exports.createRecord = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/records/:id
 // @access  Public
 exports.updateRecord = asyncHandler(async (req, res, next) => {
-  let record = await Record.findById({ id: req.params.id }, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  let record = await Record.findById(req.params.id);
 
   if (!record) {
     return res.status(404).json({
@@ -72,10 +69,8 @@ exports.updateRecord = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    record = await Record.findOneAndUpdate({ id: req.params.id }, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    record.set(req.body); // Update the record with the request body
+    await record.save(); // Save the updated record
   } catch (err) {
     console.log(err);
     return res
@@ -85,6 +80,7 @@ exports.updateRecord = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({ success: true, data: record });
 });
+
 
 // @desc    Delete Single Record
 // @route   DELETE /api/v1/records/:id
