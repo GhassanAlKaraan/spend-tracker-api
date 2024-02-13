@@ -8,12 +8,15 @@ dotenv.config({ path: './config/config.env' });
 const PORT = process.env.PORT || 5900;
 connectDB();
 
+// Load router
+const records = require('./route/records');
+
 // Make an express app and use json
 const app = express();
 app.use(express.json());
 
 // Mount routers
-//TODO
+app.use('/api/v1/records', records);
 
 // Mount middleware
 app.use(errorHandler);
@@ -23,6 +26,6 @@ const server = app.listen(PORT, console.log(`Server running on port: ${PORT}`));
 
 // Handle any server errors
 process.on('unhandledRejection', (err) => {
-  console.log(`Sorry unhandled error, check code: ${err.message}`);
+  console.log(`Sorry unhandled error: ${err.message}`);
   server.close(() => process.exit(1));
 });
